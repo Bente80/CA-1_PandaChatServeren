@@ -12,7 +12,6 @@ import java.util.Observer;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sharedprotocol.PandaProtocol;
 import utils.Utils;
 
 /**
@@ -22,11 +21,12 @@ import utils.Utils;
 public class pandaGUI extends javax.swing.JFrame implements Observer{
 
     pandaClient panda;
+    private static final Properties properties = Utils.initProperties("pandaProperty.properties");
     
     public pandaGUI() {
         initComponents();
-        int port = PandaProtocol.port;
-        String ip = PandaProtocol.serverIp;
+        int port = Integer.parseInt(properties.getProperty("port"));
+        String ip = properties.getProperty("serverIp");
         panda = new pandaClient();
         panda.addObserver(this);
 
