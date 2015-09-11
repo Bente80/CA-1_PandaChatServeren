@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
@@ -22,12 +21,10 @@ import utils.Utils;
 
 /**
  *
- * @author steffen
+ * @author steffen, Mikkel & Bente
  */
 public class PandaServeren
 {
-
-    private static final Properties properties = Utils.initProperties("pandaProperty.properties");
     private static ServerSocket serverSocket;
     private static boolean KeepRunning = true;
     PandaServeren server = this;
@@ -62,7 +59,7 @@ public class PandaServeren
                     }
                 } else
                 {
-                    String[] userString = part2.split(PandaProtocol.userDelimiter); // ved flere brugere splittes disse op, og får hver deres index i userString arrayet.
+                    String[] userString = part2.split(PandaProtocol.userDelimiter); // ved flere brugere splittes disse op, og fÃ¥r hver deres index i userString arrayet.
                     try
                     {
                         for (String users : userString)
@@ -92,7 +89,7 @@ public class PandaServeren
     public void removeHandler(ClientHandler client)
     {
         clientMap.remove(client.getUsername(), client);
-        // denne blok tilføjer users til stringWithUsers og udskriver til alle klienter
+        // denne blok tilfÃ¸jer users til stringWithUsers og udskriver til alle klienter
         String stringWithUsers = PandaProtocol.userlistCommand + PandaProtocol.delimiter;
         for (ClientHandler value : clientMap.values())
         {
@@ -106,20 +103,20 @@ public class PandaServeren
 
     public void Run()
     {
-        // henter værdierene af serverIp og port fra vores property fil
-        int port = Integer.parseInt(properties.getProperty("port"));
-        String ip = properties.getProperty("serverIp");
-        // Server startede besked med specifik ip og port tilføjet i log
+        // henter vÃ¦rdierene af serverIp og port fra vores property fil
+        int port = PandaProtocol.port;
+        String ip = PandaProtocol.serverIp;
+        // Server startede besked med specifik ip og port tilfÃ¸jet i log
         Logger.getLogger(PandaServeren.class.getName()).log(Level.INFO, "Sever started. Listening on: " + port + ", bound to: " + ip);
         try
         {
             // Serversocket instantieres
             serverSocket = new ServerSocket();
-            // serverSocket bindes til en specifik adresse, værdien af InetSocketAddress = predefinerede ip og port
+            // serverSocket bindes til en specifik adresse, vÃ¦rdien af InetSocketAddress = predefinerede ip og port
             serverSocket.bind(new InetSocketAddress(ip, port));
             do
             {
-                // serversocket venter på at nogen prøver at oprette forbindelse, og accepterer når det sker, og blockerer indtil da 
+                // serversocket venter pÃ¥ at nogen prÃ¸ver at oprette forbindelse, og accepterer nÃ¥r det sker, og blockerer indtil da 
                 Thread t;
                             Socket socket = serverSocket.accept();
                 class HelperThread implements Runnable {
@@ -140,11 +137,11 @@ public class PandaServeren
                             {
                                 // bruger den accepterede socket til at oprette en ny client
                                 ClientHandler client = new ClientHandler(username, socket, server);
-                                // starter en ny tråd for hver ny client
+                                // starter en ny trÃ¥d for hver ny client
                                 client.start();
-                                // tilføjere den nye client til det trådsikre concurrenthashmap med username som key
+                                // tilfÃ¸jere den nye client til det trÃ¥dsikre concurrenthashmap med username som key
                                 clientMap.put(username, client);
-                                // denne blok tilføjer users til stringWithUsers og udskriver til alle klienter
+                                // denne blok tilfÃ¸jer users til stringWithUsers og udskriver til alle klienter
                                 String stringWithUsers = PandaProtocol.userlistCommand + PandaProtocol.delimiter;
                                 for (ClientHandler value : clientMap.values())
                                 {
@@ -166,10 +163,10 @@ public class PandaServeren
                 };
                 t=new Thread(new HelperThread(socket));
                 t.start();
-                // besked om ny klient, tilføjet til log
+                // besked om ny klient, tilfÃ¸jet til log
                 Logger.getLogger(PandaServeren.class.getName()).log(Level.INFO, "Connected to a client");
 
-                // en boolean som kan sættes til false med stopserver metoden 
+                // en boolean som kan sÃ¦ttes til false med stopserver metoden 
             } while (KeepRunning);
         } catch (IOException ex)
         {
@@ -185,7 +182,7 @@ public class PandaServeren
 
         try
         {
-            String logFile = properties.getProperty("logFile");
+            String logFile = PandaProtocol.logFile;
             Utils.setLogFile(logFile, PandaServeren.class.getName());
 
         } finally

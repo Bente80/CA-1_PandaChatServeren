@@ -9,24 +9,23 @@ import client.pandaClient;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sharedprotocol.PandaProtocol;
 import utils.Utils;
 
 /**
  *
- * @author Mikkel
+ * @author Mikkel, Steffen & Bente
  */
 public class pandaGUI extends javax.swing.JFrame implements Observer{
 
     pandaClient panda;
-    private static final Properties properties = Utils.initProperties("pandaProperty.properties");
     
     public pandaGUI() {
         initComponents();
-        int port = Integer.parseInt(properties.getProperty("port"));
-        String ip = properties.getProperty("serverIp");
+        int port = PandaProtocol.port;
+        String ip = PandaProtocol.serverIp;
         panda = new pandaClient();
         panda.addObserver(this);
 

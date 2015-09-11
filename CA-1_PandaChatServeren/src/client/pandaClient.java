@@ -18,7 +18,7 @@ import sharedprotocol.PandaProtocol;
 
 /**
  *
- * @author Mikkel
+ * @author Mikkel, Steffen & Bente
  */
 public class pandaClient extends Observable
 {
@@ -44,9 +44,6 @@ public class pandaClient extends Observable
             {
                 while (true)
                 {
-//                    while(!input.hasNext()){
-//                    }
-//                    System.out.println(input.hasNext());
                     String msg = input.nextLine();
                     setChanged();
                     notifyObservers(msg);

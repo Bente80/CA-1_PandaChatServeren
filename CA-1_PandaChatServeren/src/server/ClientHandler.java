@@ -15,7 +15,7 @@ import sharedprotocol.PandaProtocol;
 
 /**
  *
- * @author Bente
+ * @author Bente, Mikkel & Steffen
  */
 public class ClientHandler extends Thread {
 
