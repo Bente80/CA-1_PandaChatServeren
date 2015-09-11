@@ -26,8 +26,6 @@ import utils.Utils;
  */
 public class PandaServeren
 {
-
-    private static final Properties properties = Utils.initProperties("pandaProperty.properties");
     private static ServerSocket serverSocket;
     private static boolean KeepRunning = true;
     PandaServeren server = this;
@@ -107,8 +105,8 @@ public class PandaServeren
     public void Run()
     {
         // henter værdierene af serverIp og port fra vores property fil
-        int port = Integer.parseInt(properties.getProperty("port"));
-        String ip = properties.getProperty("serverIp");
+        int port = PandaProtocol.port;
+        String ip = PandaProtocol.serverIp;
         // Server startede besked med specifik ip og port tilføjet i log
         Logger.getLogger(PandaServeren.class.getName()).log(Level.INFO, "Sever started. Listening on: " + port + ", bound to: " + ip);
         try
@@ -185,7 +183,7 @@ public class PandaServeren
 
         try
         {
-            String logFile = properties.getProperty("logFile");
+            String logFile = PandaProtocol.logFile;
             Utils.setLogFile(logFile, PandaServeren.class.getName());
 
         } finally
