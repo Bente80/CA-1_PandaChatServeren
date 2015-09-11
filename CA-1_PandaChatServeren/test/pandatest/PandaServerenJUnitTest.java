@@ -41,6 +41,8 @@ public class PandaServerenJUnitTest {
 //    Socket socket4;
 //    BufferedReader in4;
     
+    ///// rettet i test
+    
     public PandaServerenJUnitTest() {
     }
 
