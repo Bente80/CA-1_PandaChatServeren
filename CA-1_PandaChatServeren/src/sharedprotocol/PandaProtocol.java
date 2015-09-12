@@ -20,8 +20,9 @@ public class PandaProtocol {
     public static final String userCommand ="USER";
     public static final String ErrorMessage ="The server is unable to process your command, please try again";
     public static final String loginErrorMessage ="Login failed";
-     public static final String serverIp = "localhost";
-//    public static final String serverIp = "10.146.84.83";
+    public static final String serverIp = "100.86.90.81";
+//    public static final String serverIp = "localhost";
+//    public static final String serverIp = "10.146.84.83";100.86.90.81
     public static final int port = 9090;
     public static final String logFile = "PandaLogFile.txt";
 }

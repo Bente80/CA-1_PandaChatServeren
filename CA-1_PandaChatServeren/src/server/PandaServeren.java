@@ -97,7 +97,7 @@ public class PandaServeren
         }
         for (ClientHandler value : clientMap.values())
         {
-            value.send(stringWithUsers);
+            value.send(stringWithUsers.substring(0,stringWithUsers.length() - 1));
         }
     }
 
@@ -149,7 +149,7 @@ public class PandaServeren
                                 }
                                 for (ClientHandler value : clientMap.values())
                                 {
-                                    value.send(stringWithUsers);
+                                    value.send(stringWithUsers.substring(0,stringWithUsers.length() - 1));
                                 }
                             } else
                             {

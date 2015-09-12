@@ -70,7 +70,7 @@ public class PandaServerenJUnitTest {
         String msg = in.readLine();
         output.println("STOP#");
 
-        String serverResponse = "USERLIST#Bubber,";
+        String serverResponse = "USERLIST#Bubber";
         assertTrue(serverResponse.equals(msg));
     }
 
@@ -94,7 +94,7 @@ public class PandaServerenJUnitTest {
         output2.println("STOP#");
         System.out.println("fra test 2, skal indeholde bubber,panda"+userlist2);
 
-        String serverResponse = "USERLIST#Bubber,Panda,";
+        String serverResponse = "USERLIST#Bubber,Panda";
         assertTrue(serverResponse.equals(userlist2));
     }
     
@@ -118,7 +118,7 @@ public class PandaServerenJUnitTest {
         String userlist2 = in2.readLine();
         output2.println("STOP#");
 
-        String serverResponse = "USERLIST#Torben,";
+        String serverResponse = "USERLIST#Torben";
         assertTrue(serverResponse.equals(userlist2));
     }
     
@@ -211,7 +211,7 @@ public class PandaServerenJUnitTest {
         String BillsOutput = in3.readLine();
         
         assertTrue(MatthewsOutput.equals("MSG#Tom Brady#Hi guys"));
-        assertTrue(RobsOutput.equals("USERLIST#Matthew Slater,Bill Belichick,Rob Gronkowski,Tom Brady,"));
+        assertTrue(RobsOutput.equals("USERLIST#Matthew Slater,Bill Belichick,Rob Gronkowski,Tom Brady"));
         assertFalse(BillsOutput.equals("MSG#Tom Brady#Hi guys"));
         
         output.println("STOP#");
